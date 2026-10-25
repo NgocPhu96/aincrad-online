@@ -1,0 +1,11 @@
+# Dành cho hosting dùng Apache/cPanel: kiểu file đúng cho WebAssembly + nén cho tải nhanh
+AddType application/wasm .wasm
+AddType application/octet-stream .pck
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE application/wasm application/octet-stream application/javascript text/html
+</IfModule>
+<IfModule mod_headers.c>
+  <FilesMatch "\.(wasm|pck)$">
+    Header set Cache-Control "public, max-age=3600"
+  </FilesMatch>
+</IfModule>
